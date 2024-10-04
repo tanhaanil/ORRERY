@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Comet Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+        .card {
+            margin: 20px;
+        }
+        #search-result {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="center-align">Search for Images and Videos</h1>
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" id="search-input" placeholder="Enter comet name">
+                <label for="search-input"></label>
+            </div>
+            <button id="search-button" class="btn">Search</button>
+        </div>
+        <div id="search-result"></div>
+    </div>
+
+    <script src="comet.js"></script>
+</body>
+</html>

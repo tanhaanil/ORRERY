@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth</title>
+    <style>
+        body {
+            background-image: url('assets/earth_bg.png'); /* Set the background image */
+            background-size: cover; /* Make sure the background covers the entire screen */
+            background-repeat: no-repeat; /* Prevent background repetition */
+            background-attachment: fixed; /* Keep the background fixed during scroll */
+            background-position: center; /* Center the background */
+            min-height: 100vh; /* Ensure it takes up full screen height */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding-top: 50px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .link-button {
+            background-color: #1d87e4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .link-button:hover {
+            background-color: #155a96;
+        }
+    </style>
+</head>
+<body>
+    <h1>About Earth</h1>
+    <p>
+        Earth is the third planet from the Sun and the fifth largest planet in our solar system. It is the only known place in the universe to support life. About 70% of its surface is covered by oceans. Earth features diverse ecosystems and has a protective atmosphere composed of nitrogen, oxygen, and trace gases that enable life to thrive. Its surface includes mountains, deserts, forests, and polar ice caps, and it experiences dynamic weather patterns, seasons, and natural phenomena like volcanic eruptions, earthquakes, and storms.
+    </p>
+    <div class="button-container">
+        <a href="https://science.nasa.gov/earth/facts/" target="_blank" class="link-button">Earth Facts</a>
+        <a href="https://eyes.nasa.gov/apps/earth/#/" target="_blank" class="link-button">Explore Earth in NASA's Eyes</a>
+        <a href="https://science.nasa.gov/earth/" target="_blank" class="link-button">NASA Earth Science</a>
+        <a href="https://earthobservatory.nasa.gov/" target="_blank" class="link-button">Earth Observatory</a>
+    </div>
+
+</body>
+</html>

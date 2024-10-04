@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.dart-mission-page {
+    max-width: 800px; /* Set a max width for the main content */
+    margin: auto; /* Center the content */
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center; /* Center the title */
+    color: #333;
+}
+
+.main-video {
+    text-align: center; /* Center-align the video section */
+    margin-bottom: 20px; /* Add some space below the video */
+}
+
+.dart-video {
+    width: 80%; /* Set the video width to 80% of its container */
+    max-width: 600px; /* Set a maximum width for the video */
+    height: auto; /* Maintain the aspect ratio */
+}
+
+p {
+    text-align: justify; /* Justify the paragraph text */
+    color: #555;
+}
+
+.nasa-videos {
+    margin-top: 20px; /* Add space above the additional videos section */
+}
+
+.nasa-videos h2 {
+    text-align: center; /* Center the heading for additional videos */
+}
+
+.nasa-videos ul {
+    list-style-type: none; /* Remove bullet points from the list */
+    padding: 0; /* Remove padding */
+}
+
+.nasa-videos li {
+    margin: 10px 0; /* Add space between list items */
+    text-align: center; /* Center the list items */
+}
+
+.nasa-videos a {
+    color: #007BFF; /* Link color */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.nasa-videos a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

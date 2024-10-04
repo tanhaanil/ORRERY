@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comets: A Fascinating Journey</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #444;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+        }
+        .left-container {
+            flex: 2; /* Left container takes more space */
+            padding: 20px;
+            max-width: 850px; /* Set a maximum width for balance */
+            margin-right: 20px; /* Add some space between the left and right containers */
+        }
+        .right-container {
+            flex: 1; /* Right container takes less space */
+            padding: 20px;
+            max-width: 400px; /* Set a maximum width for balance */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Add space between sections */
+            width: 100%; /* Ensures the container takes full width */
+            padding: 15px; /* Add padding for better spacing */
+        }
+
+        .keplerian-container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #003366;
+            text-align: center;
+        }
+        h2 {
+            color: #003366;
+            margin-top: 30px;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        video {
+            display: block;
+            max-width: 100%; /* Responsive sizing */
+            height: auto;
+            width: 100%; /* Full width of the container */
+            max-height: 450px; /* Set a maximum height for consistency */
+            margin: 20px auto;
+            border-radius: 8px;
+            background: #000;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+            background-color: #000;
+        }
+        .comet-item {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: row;
+        }
+        .comet-img {
+            max-width: 80px;
+            margin-right: 10px;
+        }
+        .comet-info {
+            font-size: 0.9em;
+        }
+        .model-link {
+            color: #003366;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-container">
+      <div class="container">
+        <h1>Comets: A Fascinating Journey</h1>
+        <p>Comets are celestial bodies composed of ice, dust, and rocky material. Often called "dirty snowballs," they are remnants from the formation of the solar system about 4.6 billion years ago. As comets orbit close to the Sun, they heat up and release gases, forming a glowing coma and often a spectacular tail. These icy wanderers offer valuable insights into the early solar system and have fascinated humans for centuries.</p>
+        
+        <video controls>
+            <source src="asset/Comets _ The Dr. Binocs Show _ Educational Videos For Kids.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="keplerian-container">
+        <section id="keplerian-parameters">
+            <h2>Keplerian Parameters of Comets</h2>
+            <p>
+                Keplerian parameters describe the orbits of comets and include:
+            </p>
+            <ul>
+                <li><strong>Semi-Major Axis (a):</strong> The average distance from the center of the orbit to the comet, typically expressed in astronomical units (AU).</li>
+                <li><strong>Eccentricity (e):</strong> A measure of how elongated the comet's orbit is; values close to 1 indicate highly elliptical orbits.</li>
+                <li><strong>Inclination (i):</strong> The angle of the orbit's tilt relative to the plane of the solar system.</li>
+                <li><strong>Longitude of Ascending Node (Ω):</strong> The angle from a reference direction to the ascending node where the comet crosses the solar system's plane.</li>
+                <li><strong>Argument of Periapsis (ω):</strong> The angle between the ascending node and the point of closest approach to the Sun (periapsis).</li>
+                <li><strong>True Anomaly (ν):</strong> The angle between the periapsis and the comet's current position along its orbit.</li>
+            </ul>
+            <p>
+                For example, the comet <em>Halley's Comet</em> has the following parameters:
+            </p>
+            <ul>
+                <li><strong>Semi-Major Axis:</strong> 17.8 AU</li>
+                <li><strong>Eccentricity:</strong> 0.967</li>
+                <li><strong>Inclination:</strong> 162.3°</li>
+                <li><strong>Longitude of Ascending Node:</strong> 58.9°</li>
+                <li><strong>Argument of Periapsis:</strong> 111.7°</li>
+            </ul>
+        </section>
+        <!-- Animation Canvas -->
+        <canvas id="orbitCanvas" width="800" height="800"></canvas>
+      </div>
+    </div>
+    <script>
+        const canvas = document.getElementById('orbitCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Halley's Comet Keplerian Parameters
+        const cometA = 17.8; // Semi-major axis in AU
+        const cometE = 0.967; // Eccentricity
+        const cometI = (162.3 * Math.PI) / 180; // Inclination in radians
+        const cometOmega = (111.7 * Math.PI) / 180; // Argument of periapsis in radians
+        const cometOmegaAsc = (58.9 * Math.PI) / 180; // Longitude of ascending node in radians
+        const cometPeriod = 76; // Orbital period in years
+
+        // Earth's Keplerian Parameters
+        const earthA = 1; // Semi-major axis in AU
+        const earthE = 0.0167; // Eccentricity
+        const earthI = 0; // Inclination in radians
+        const earthPeriod = 1; // Orbital period in years
+
+        // Convert AU to pixels for visualization (adjust for better visibility)
+        const AUtoPixels = 200; // Adjusted for better view
+        const cometSemiMajorAxis = cometA * AUtoPixels;
+        const earthSemiMajorAxis = earthA * AUtoPixels;
+
+        let cometTime = 0; // Time variable for comet animation
+        let earthTime = 0; // Time variable for earth animation
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Calculate Halley's Comet position
+            const cometTrueAnomaly = 2 * Math.PI * (cometTime / cometPeriod); // Adjusted for orbit period
+            const cometRadius = (cometSemiMajorAxis * (1 - cometE * cometE)) / (1 + cometE * Math.cos(cometTrueAnomaly));
+            const cometX = cometRadius * Math.cos(cometTrueAnomaly);
+            const cometY = cometRadius * Math.sin(cometTrueAnomaly) * Math.cos(cometI); // Inclined orbits
+
+            // Calculate Earth's position
+            const earthTrueAnomaly = 2 * Math.PI * (earthTime / earthPeriod); // Adjusted for orbit period
+            const earthRadius = (earthSemiMajorAxis * (1 - earthE * earthE)) / (1 + earthE * Math.cos(earthTrueAnomaly));
+            const earthX = earthRadius * Math.cos(earthTrueAnomaly);
+            const earthY = earthRadius * Math.sin(earthTrueAnomaly) * Math.cos(earthI); // Inclined orbits
+
+            // Transform the coordinates to center the orbits
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+
+            // Draw the Sun
+            ctx.fillStyle = 'yellow';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Label the Sun
+            ctx.fillStyle = 'white';
+            ctx.font = '16px Arial';
+            ctx.fillText("Sun", centerX + 15, centerY + 5); // Adjusted position for label
+
+            // Draw Halley's Comet's position
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(centerX + cometX, centerY - cometY, 5, 0, Math.PI * 2); // Subtract y for correct direction
+            ctx.fill();
+
+            // Label Halley's Comet
+            ctx.fillStyle = 'white';
+            ctx.fillText("Halley's Comet", centerX + cometX + 10, centerY - cometY); // Adjusted position for label
+
+            // Draw Earth's position
+            ctx.fillStyle = 'blue';
+            ctx.beginPath();
+            ctx.arc(centerX + earthX, centerY - earthY, 7, 0, Math.PI * 2); // Subtract y for correct direction
+            ctx.fill();
+
+            // Label the Earth
+            ctx.fillStyle = 'white';
+            ctx.fillText("Earth", centerX + earthX + 10, centerY - earthY); // Adjusted position for label
+
+            // Draw the orbit path for Halley's Comet
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.beginPath();
+            for (let angle = 0; angle < 2 * Math.PI; angle += 0.01) {
+                const orbitRadius = (cometSemiMajorAxis * (1 - cometE * cometE)) / (1 + cometE * Math.cos(angle));
+                const orbitX = centerX + orbitRadius * Math.cos(angle);
+                const orbitY = centerY - orbitRadius * Math.sin(angle) * Math.cos(cometI); // Adjust for inclination
+                ctx.lineTo(orbitX, orbitY);
+            }
+            ctx.closePath();
+            ctx.stroke();
+
+            // Draw the orbit path for Earth
+            ctx.strokeStyle = 'rgba(0, 0, 255, 0.5)';
+            ctx.beginPath();
+            for (let angle = 0; angle < 2 * Math.PI; angle += 0.01) {
+                const orbitRadius = (earthSemiMajorAxis * (1 - earthE * earthE)) / (1 + earthE * Math.cos(angle));
+                const orbitX = centerX + orbitRadius * Math.cos(angle);
+                const orbitY = centerY - orbitRadius * Math.sin(angle) * Math.cos(earthI); // Adjust for inclination
+                ctx.lineTo(orbitX, orbitY);
+            }
+            ctx.closePath();
+            ctx.stroke();
+
+            // Increment time for the next frame
+            cometTime += 0.05; // Increased increment for faster comet animation
+            if (cometTime > cometPeriod) cometTime = 0; // Reset comet time
+
+            earthTime += 1 / 365; // Increment time for Earth's animation (1 day per frame)
+            if (earthTime > earthPeriod) earthTime = 0; // Reset earth time
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+    </div>
+
+    <div class="right-container">
+        <h1>Comet Information</h1>
+        <div class="comet-container" id="cometList">
+            <!-- Comets will be dynamically inserted here -->
+        </div>
+    </div>
+    
+
+    <script>
+        // Comets data (array of objects with comet details and 3D models)
+        const comets = [
+            {
+                img: "asset/h.jpg",
+                modelLink: "https://www.spacereference.org/solar-system#ob=2688-halley-1982-hg1",
+                name: "Halley's Comet",
+                info: "Halley's Comet is a comet visible from Earth every 76 years. It was last seen in 1986.",
+            },
+            {
+                img: "asset/t.jpeg",
+                modelLink: "https://www.spacereference.org/solar-system#ob=25920-templeanne-2001-dt18",
+                name: "Temple 1",
+                info: "Temple 1 is a comet visited by the spacecraft Deep Impact in 2005.",
+            },
+            {
+                img: "asset/g.jpeg",
+                modelLink: "https://www.spacereference.org/solar-system#ob=21p-giacobini-zinner",
+                name: "Giacobini-Zinner",
+                info: "Giacobini-Zinner is a periodic comet with a period of 6.6 years.",
+            },
+            {
+                img: "asset/h.jpeg",
+                modelLink: "https://www.spacereference.org/solar-system#ob=c-1995-o1-hale-bopp",
+                name: "Hale-Bopp",
+                info: "Discovered in 1995, Hale-Bopp was one of the brightest comets of the 20th century.",
+            },
+            {
+                img: "asset/n.jpeg",
+                modelLink: "https://www.spacereference.org/solar-system#ob=417p-neowise",
+                name: "Neowise",
+                info: "Comet Neowise was discovered in 2020 and became visible to the naked eye in July 2020.",
+            }
+        ];
+
+        // Function to load and display comet data
+        function loadComets() {
+            const cometList = document.getElementById("cometList");
+
+            comets.forEach(comet => {
+                const cometItem = document.createElement("div");
+                cometItem.classList.add("comet-item");
+
+                const cometImage = document.createElement("img");
+                cometImage.src = comet.img;
+                cometImage.alt = comet.name;
+                cometImage.classList.add("comet-img");
+
+                const cometInfo = document.createElement("div");
+                cometInfo.classList.add("comet-info");
+                cometInfo.innerHTML = `<strong>${comet.name}</strong><br>${comet.info}<br><a href="${comet.modelLink}" class="model-link">View Model</a>`;
+
+                cometItem.appendChild(cometImage);
+                cometItem.appendChild(cometInfo);
+                cometList.appendChild(cometItem);
+            });
+        }
+
+        loadComets();
+    </script>
+</body>
+</html>

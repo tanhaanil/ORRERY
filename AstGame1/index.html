@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Hazard Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            display: flex;
+            flex-direction: row;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1200px;
+            max-height: 100vh;
+            border: 2px solid #333;
+            background-color: #fff;
+        }
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 65%;
+            padding: 20px;
+        }
+        .media-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            height: 40%;
+        }
+        .asteroid-img, video {
+            width: 48%;  /* Fixed width to ensure consistency */
+            height: auto; /* Maintain aspect ratio */
+            max-height: 100%; /* Ensure it doesn't overflow the container */
+            object-fit: contain; /* Scale the image and video without distortion */
+        }
+        .asteroid-info {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .question {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 18px;
+        }
+        .message {
+            font-size: 24px;
+            color: rgb(130, 104, 215);
+            font-weight: bold;
+        }
+        .parameters-box {
+            width: 35%;
+            padding: 20px;
+            font-size: 14px;
+            background-color: #fff;
+            border-left: 2px solid #333;
+            overflow-y: auto;
+        }
+        ul {
+            text-align: left;
+            padding-left: 20px;
+        }
+        .model-link {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        #scoreContainer {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="content-container">
+            <div class="media-container">
+                <img id="asteroidImg" class="asteroid-img" src="assets/apophis.png" alt="Asteroid">
+                <video id="asteroidVideo" controls>
+                    <source id="asteroidVideoSource" src="assets/apophis_orbit.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div id="asteroidInfo" class="asteroid-info">
+                Asteroid Information will be here.
+            </div>
+            <div class="model-link" id="modelLink"></div> <!-- Model Link -->
+            <div class="question">
+                Could this asteroid be a threat to Earth? What do you think?
+            </div>
+            <div class="button-container">
+                <button onclick="guess(true)">Yes, it's dangerous!</button>
+                <button onclick="guess(false)">No, it's harmless!</button>
+                <button id="backButton" onclick="loadPreviousAsteroid()">Back</button>
+                <button id="nextButton" onclick="loadNextAsteroid()">Next</button>
+            
+            </div>
+            
+            <div id="resultMessage" class="message"></div>
+            <button id="dartButton" onclick="launchDART()" style="display:none;">Launch DART: Defend Earth from the Asteroid! </button>
+            
+        </div>
+
+        <div id="parameters" class="parameters-box">
+            <strong>Parameters for Classifying a Potentially Hazardous Asteroid (PHA):</strong><br><br>
+            <ul>
+                <li><strong>Orbit Type:</strong> Must be on an Apollo or Aten orbit (crosses near Earth's orbit).</li><br>
+                <li><strong>Size:</strong> Larger than 140 meters in diameter.</li><br>
+                <li><strong>MOID:</strong> Minimum Orbit Intersection Distance to Earth of 0.05 AU or less (~7.48 million km).</li><br>
+                <li><strong>Magnitude (H):</strong> Absolute magnitude of 22.0 or less (indicating large size).</li><br>
+                <li><strong>Close Approach:</strong> Can travel within 0.05 AU of Earth’s orbit.</li>
+            </ul>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

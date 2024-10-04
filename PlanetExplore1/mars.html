@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Mars</title>
+    <style>
+        body {
+            background-image: url('assets/mars_bg.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px; /* Add padding for text */
+            margin: 0; /* Remove default margin */
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            text-align: center;
+            width: 100%; /* Set width to 100% */
+            margin-bottom: 40px; /* Add space between text and buttons */
+            padding: 0 20px; /* Add horizontal padding */
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .link-button {
+            padding: 10px 20px;
+            background-color: #ff5733;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+            width: 300px;
+        }
+        .link-button:hover {
+            background-color: #ff7961;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>About Mars</h1>
+    <p>
+    Mars is the fourth planet from the Sun and is the second smallest planet in the solar system. Its rocky, red surface is covered in iron oxide (rust), giving it its distinct color. Mars features vast plains, towering volcanoes like Olympus Mons, and deep canyons such as Valles Marineris. The planet has polar ice caps made of water and carbon dioxide ice, along with a thin atmosphere mostly composed of carbon dioxide. While cold and dry today, Mars shows signs of ancient water flow with dried-up riverbeds and lakebeds. Dust storms frequently sweep across the surface, and large impact craters like Hellas Planitia are prominent.
+    </p>
+    <div class="button-container">
+        <a href="https://science.nasa.gov/mars/" class="link-button" target="_blank">NASA Mars Science</a>
+        <a href="https://www.nasa.gov/humans-in-space/humans-to-mars/" class="link-button" target="_blank">Humans to Mars</a>
+        <a href="https://science.nasa.gov/mars/resources/?search=perseverance&types=audio&content_list=true" class="link-button" target="_blank">Mars Perseverance Resources</a>
+        <a href="https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/" class="link-button" target="_blank">Mars Rovers: Spirit and Opportunity</a>
+    </div>
+
+</body>
+</html>
+

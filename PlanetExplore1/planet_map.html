@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Map</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            height: auto; /* Allow for height based on content */
+            overflow-y: scroll; /* Allow vertical scrolling */
+            padding: 20px; /* Add some padding */
+        }
+        #planet-container {
+            position: relative; /* Positioning context for planets */
+            width: 100%; /* Full width */
+            height: auto; /* Auto height to allow scrolling */
+            margin-bottom: 20px; /* Space below the container */
+        }
+        .planet {
+            text-align: center;
+            cursor: pointer;
+            position: relative; /* Positioning context for planets */
+            margin-bottom: 50px; /* Add space below each planet */
+            display: inline-block; /* Align planets in a row */
+            width: 150px; /* Fixed width for planets */
+        }
+        img {
+            width: 100px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            margin-top: 10px; /* Space between the name and the image */
+        }
+        .mission {
+            margin-top: 10px;
+        }
+        /* Custom styles for planet arrangement */
+        .row {
+            display: flex; /* Flexbox for rows */
+            justify-content: center; /* Center planets in rows */
+            margin-bottom: 200px; /* Space between rows */
+        }
+        .planet {
+            margin-right: 250px; /* Further increase distance between planets */
+        }
+        /* Remove the last planet margin */
+        .planet:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Planet Map</h1>
+    <div id="planet-container">
+        <div class="row">
+            <div id="earth" class="planet" onclick="travelTo('earth.html')">
+                <h2>Earth</h2>
+                <img src="assets/earth.png" alt="Earth">
+                <div class="mission">Mission 1</div>
+            </div>
+            <div id="mars" class="planet" onclick="travelTo('mars.html')">
+                <h2>Mars</h2>
+                <img src="assets/mars.png" alt="Mars">
+                <div class="mission">Mission 2</div>
+            </div>
+            <div id="venus" class="planet" onclick="travelTo('venus.html')">
+                <h2>Venus</h2>
+                <img src="assets/venus.png" alt="Venus">
+                <div class="mission">Mission 3</div>
+            </div>
+            <div id="jupiter" class="planet" onclick="travelTo('jupiter.html')">
+                <h2>Jupiter</h2>
+                <img src="assets/jupiter.png" alt="Jupiter">
+                <div class="mission">Mission 4</div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div id="saturn" class="planet" onclick="travelTo('saturn.html')">
+                <h2>Saturn</h2>
+                <img src="assets/saturn.png" alt="Saturn">
+                <div class="mission">Mission 5</div>
+            </div>
+            <div id="neptune" class="planet" onclick="travelTo('neptune.html')">
+                <h2>Neptune</h2>
+                <img src="assets/neptune.png" alt="Neptune">
+                <div class="mission">Mission 6</div>
+            </div>
+            <div id="uranus" class="planet" onclick="travelTo('uranus.html')">
+                <h2>Uranus</h2>
+                <img src="assets/uranus.png" alt="Uranus">
+                <div class="mission">Mission 7</div>
+            </div>
+            <div id="mercury" class="planet" onclick="travelTo('mercury.html')">
+                <h2>Mercury</h2>
+                <img src="assets/mercury.png" alt="Mercury">
+                <div class="mission">Mission 8</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
